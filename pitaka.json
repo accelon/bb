@@ -1,0 +1,13 @@
+﻿{
+	"name":"bb",
+	"title": "Bhikkhu Bodhi EN|sc",
+	"description":"English Translation by Bhikkhu Bodhi and Maurice Walshe(DN)",
+	"template":"cs",
+	"lang":"en",
+	"label":"end,trailer,cite",
+	"labels":{
+	},
+	"homepage":"https://github.com/accelon/bb",
+	"rootdir":"en/",
+	"files":"dn?.bb.off,mn?.bb.off,sn?.bb.off,an?.bb.off,an??.bb.off"
+}

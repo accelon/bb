@@ -7,19 +7,19 @@ const replacePN=m1=>{
 }
 const replaceItalic=m1=>(m1=="."||m1==","||m1=='‘'||m1=='”'||m1=='’'||m1=='“'||parseInt(m1))?m1:'^i['+m1+']';
 
-
+const replaceHeader=m1=>{
+    return '^h['+m1.replace(/<\/?[^>]+>/g,'')+']';//not styling inside header
+}
 const replaceDN=(s,id)=>{
-    return s.replace(/<div class="calibre15"><span class="calibre18"><span class="bold"> ?(\d+) <span class="italic">([^<]+)<\/span><\/span>/g,'^z1[$2]')
+    return s.replace(/<span class="bold"><span class="italic">/g,'<span class="bold">') //prevent ^i inside ^h
+    .replace(/<div class="calibre15"><span class="calibre18"><span class="bold"> ?(\d+) <span class="italic">([^<]+)<\/span><\/span>/g,'^z1[$2]')
     .replace(/<a [^>]+><sup class="calibre\d+">(\d+)<\/sup><\/a>/g,"^f$1")
       .replace(/\n?〔?<span class="italic">([^<]+)<\/span>〕?/g,(m,m1)=>replaceItalic(m1))
     //   .replace(/<div class="calibre27"><blockquote class="calibre28"><span class="calibre8"><div class="calibre16"><span class="calibre8">/g,"\n^sz ")
-      .replace(/<div class="calibre15"><span class="calibre4"><span class="bold">([^<]+)<\/span>/g,"^h[$1]")
+      .replace(/<div class="calibre15"><span class="calibre4"><span class="bold">([^<]+)<\/span>/g,(m,m1)=>replaceHeader(m1))
       .replace(/〔?<span class="italic1">([^<]+)〕?<\/span>〕?/g,"^z1[$1]")
-//      .replace(/\^ck#(.+)\n\^h\[([^\]]+)\]/g,'^h[$1 $2]')
-      //.replace(/\n\^pts(\d+) ?/g ,"^pts$1\n") //make sure it doesn't at the begining of line
       .replace(/<\/?[^>]+>/g,'')
       .replace(/\n\u00a0*(\d[\.\d —\-]+)/g,(m,m1)=>replacePN(m1))
-    //   .replace(/\^sz ([\.\d —-]+)/g,(m,m1)=>replacePN(m1).trim()+'^sz ')
       .replace(/\n\^n +/g,'')
 }
 const replaceMN=(s,id)=>{

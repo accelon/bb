@@ -92,4 +92,6 @@ export const combineHTML=(files=[])=>{
 export const bookFiles=bkid=>{
     suttaOfBook(bk)
 }
+
+
 export const filesOf=(pat,rootfolder)=>sc.getFilesOfBook(pat,filesFolders,rootfolder);

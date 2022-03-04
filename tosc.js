@@ -6,7 +6,7 @@ export const SuttaCentralify=(lines,prefix,ptspar)=>{
     let pn='',paravakya,vakya=0;
     const out={};
     for (let i=0;i<lines.length;i++) {
-        let l=lines[i];
+        let l=lines[i]||'';
         const m=linePN(l);
         if (m) { //a new PN
             const headers=(m.index>2?l.substr(0, m.index):'');
@@ -16,7 +16,6 @@ export const SuttaCentralify=(lines,prefix,ptspar)=>{
                 vakya=0;
                 paravakya=listParaVakya(ptspar,pn);
                 let subpara=paravakya[vakya];
-
                 if (headers ) {
                     if (subpara&&subpara.indexOf('.1')>0) {
                         out[prefix+'.'+subpara.replace('.1','.0')]=headers;
@@ -24,10 +23,17 @@ export const SuttaCentralify=(lines,prefix,ptspar)=>{
                 }
                 out[prefix+'.'+ subpara ]=l;
             } else {
-                if (headers) out[prefix+pn+'.0']=headers;
+                if (headers) {
+                    if(pn==='1'||pn==='1.1') {
+                        //0.1 is dropped (Nikaya name) , 0.3 is not always available
+                        out[prefix+'0.2']=headers; //workaround to make header before ^n
+                    } else {
+                        out[prefix+pn+'.0']=headers;
+                    }
+                }
                 out[prefix + pn+'.1']=l;
             }
-            vakya=0;
+            vakya=1;
         } else {
             if (ptspar) {
                 if (!paravakya) {

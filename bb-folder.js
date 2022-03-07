@@ -8,10 +8,11 @@ export const filesFolders={
     d23:["dn/_109?"],
     dn2:["dn/_{75-109}"],
     dn3:["dn/_{111-121}"],
-    dn_notes:["dn/_{126-127}"],
+    dn_notes:["dn/_{126-127}"],dn1_notes:["dn/_{126-127}"],dn2_notes:["dn/_{126-127}"], dn3_notes:["dn/_{126-127}"],
     mn1:["mn/_{32-214}"], 
     mn2:["mn/_{215-282}"],
     mn3:["mn/_{283-393}"],
+    mn_notes:["mn/_{400-403}"], mn1_notes:["mn/_{400-401}"],mn2_notes:["mn/_{401-402}"],mn3_notes:["mn/_{402-403}"],
     m1:["mn/_{32-40}"],m2:["mn/_{41-50}"],m3:["mn/?_051"],m4:["mn/?_052"],m5:["mn/?_053"],m6:["mn/?_054"],m7:["mn/?_055"],m8:["mn/_{056-63}"],m9:["mn/_{064-80}"],m10:["mn/_{81-93}"],
     m11:["mn/?_094"],m12:["mn/_{095-101}"],m13:["mn/_{102-105}"],m14:["mn/?_106"],m15:["mn/?_107"],m16:["mn/?_108"],m17:["mn/?_109"],m18:["mn/?_110"],m19:["mn/?_111"],m20:["mn/?_112"],
     m21:["mn/?_114"],m22:["mn/_{115-125}"],m23:["mn/?_126"],m24:["mn/?_127"],m25:["mn/?_128"],m26:["mn/_{129-134}"],m27:["mn/?_135"],m28:["mn/_{136-140}"],m29:["mn/?_141"],m30:["mn/?_142"],
@@ -27,18 +28,18 @@ export const filesFolders={
     m121:["mn/?_348"],m122:["mn/?_349"],m123:["mn/?_350"],m124:["mn/?_351"],m125:["mn/?_352"],m126:["mn/?_353"],m127:["mn/?_354"],m128:["mn/?_355"],m129:["mn/?_{356-361}"],m130:["mn/?_362"],
     m131:["mn/?_364"],m132:["mn/?_365"],m133:["mn/?_366"],m134:["mn/?_367"],m135:["mn/?_368"],m136:["mn/?_369"],m137:["mn/?_370"],m138:["mn/?_371"],m139:["mn/?_372"],m140:["mn/?_373"],m141:["mn/?_374"],m142:["mn/?_375"],
     m143:["mn/?_377"],m144:["mn/?_378"],m145:["mn/?_379"],m146:["mn/?_380"],m147:["mn/?_381"],m148:["mn/?_382"],m149:["mn/?_391"],m150:["mn/?_392"],m151:["mn/?_393"],m152:["mn/?_394"],
-    mn_notes:["mn/_{400-403}"],
-    sn1:["sn/c{1-11}_r1."] ,
-    sn2:["sn/c{12-21}_r1."] ,
-    sn3:["sn/c{23-35}_r1."] ,
-    sn4:["sn/c{36-45}_r1."] ,
-    sn5:["sn/c{46-57}_r1."] ,
-    //sn notes in each samyutta
+    
+    sn1:["sn/c{1-11}_r1."] ,   sn1_notes:["sn/?c11_r1"],
+    sn2:["sn/c{12-21}_r1."] ,  sn2_notes:["sn/?c21_r1"],
+    sn3:["sn/c{23-35}_r1."] ,  sn3_notes:["sn/?c35_r1"],
+    sn4:["sn/c{36-45}_r1."] ,  sn4_notes:["sn/?c45_r1"],
+    sn5:["sn/c{46-57}_r1."] ,  sn5_notes:["sn/?c57_r1"],
+    sn_notes:["sn/?c11_r1","sn/?c21_r1","sn/?c35_r1","sn/?c45_r1","sn/?c57_r1"],
 
     an1:["an/?_100."],an2:["an/?_101."],an3:["an/_{102-122}."],an4:["an/_{124-174}."], an5:["an/_{175-196}."],
     an6:["an/_{197-211}."],an7:["an/_{212-228}."],an8:["an/_{230-256}."],an9:["an/?_257."], an10:["an/_{258-268}."],an11:["an/_{269-271}."],
 
-    an_notes:["an/_273-283"],
+    an_notes:["an/_{273-283}"],
     snp:["snp/_{7-89}.html"]
 }
 for (let i=2;i<14;i++) filesFolders['d'+i]=["dn/?_"+(''+(i+60)).padStart(3,'0')];//_62 dn1
@@ -61,6 +62,7 @@ const hasNote={
     'epub/sn/tran_9780861719730_oeb_c57_r1.html':true,
     'epub/sn/tran_9780861719730_oeb_c57_r1_b.html':true,
 }
+
 export const combineHTML=(files=[])=>{
     let out='',html='',notes='';
     for (let i=0;i<files.length;i++){
@@ -78,7 +80,7 @@ export const combineHTML=(files=[])=>{
         if (hasNote[fn]) {
             const m=html.match(/<b> ?Notes<\/b>/);
             if (m) {
-                notes+=html.substr(m.index+m[0].length);
+                notes+=html.substring(m.index+m[0].length);
                 out+=html.substring(0,m.index);    
             } else {
                 notes+=html;
@@ -94,4 +96,8 @@ export const bookFiles=bkid=>{
 }
 
 
-export const filesOf=(pat,rootfolder)=>sc.getFilesOfBook(pat,filesFolders,rootfolder);
+export const filesOf=(pat,rootfolder,withfolder=false)=>{
+    let files=sc.getFilesOfBook(pat,filesFolders,rootfolder);
+    if (withfolder) files=files.map(fn=>rootfolder+fn);
+    return files
+};

@@ -13,7 +13,7 @@ const replaceHeader=m1=>{
 const replaceDN=(s,id)=>{
     return s.replace(/<span class="bold"><span class="italic">/g,'<span class="bold">') //prevent ^i inside ^h
     .replace(/<div class="calibre15"><span class="calibre18"><span class="bold"> ?(\d+) <span class="italic">([^<]+)<\/span><\/span>/g,'^z1[$2]')
-    .replace(/<a [^>]+><sup class="calibre\d+">(\d+)<\/sup><\/a>/g,"^f$1")
+    .replace(/<a [^>]+><sup class="calibre\d+">(\d+)<\/sup><\/a>/g,"⚓$1")
       .replace(/\n?〔?<span class="italic">([^<]+)<\/span>〕?/g,(m,m1)=>replaceItalic(m1))
     //   .replace(/<div class="calibre27"><blockquote class="calibre28"><span class="calibre8"><div class="calibre16"><span class="calibre8">/g,"\n^sz ")
       .replace(/<div class="calibre15"><span class="calibre4"><span class="bold">([^<]+)<\/span>/g,(m,m1)=>replaceHeader(m1))
@@ -29,7 +29,7 @@ const replaceMN=(s,id)=>{
      s=s.replace(/<h2.+?\n<span class="bold1"><span class="italic1">(.+?)<\/span><\/span>\n<\/span><\/span><\/h2><div class="calibre9"> <\/div>\n/g,"^h[$1]")//pali sutta name
      s=s.replace(/<h2.+?\n<span class="bold1">(.+?)<\/span>\n<\/span><\/h2><div class="calibre9"> <\/div>/g,"^z2[$1]")//section
      s=s.replace(/<div class="calibre1[67]"><span class="calibre7">[ \u00a0]*([\.\d —–\-]+)/g,(m,m1)=>replacePN(m1))
-     .replace(/<a [^>]+><sup class="calibre\d+">([\d]+)<\/sup><\/a>/g,"^f$1")
+     .replace(/<a [^>]+><sup class="calibre\d+">([\d]+)<\/sup><\/a>/g,"⚓$1")
      .replace(/<div class="calibre1[67]"><span class="calibre7">/g,'')
      .replace(/<br[^>]*>/g,'\n')
      .replace(/\n?〔?<span class="italic">([^<]+)<\/span>〕?/g,(m,m1)=>replaceItalic(m1))
@@ -60,7 +60,7 @@ const replaceSN=(s,id)=>{
     })
     // .replace(/<div class="tx1">([^<])/g,'^n0_0 $1')   //有時 經號被 tx1 包住
     // .replace(/<div class="tx">/g,'^n0_0 ')
-    .replace(/<a [^>]+><sup>(\d+)<\/sup><\/a>/g,'^f$1')
+    .replace(/<a [^>]+><sup>(\d+)<\/sup><\/a>/g,'⚓$1')
     .replace(/<\/?[^>]+>/g,'')
     .replace(/\n\u00a0+\n/g,'')
     .replace(/\n+/g,'\n')
@@ -75,6 +75,7 @@ const replaceAN=(s,id)=>{
         return '^n'+pn+' ';
     }).replace(/<p class="calibre1"><a id="p\d+"><\/a>\d+ *<i class="calibre3"> *The Book of the [a-zA-Z]+<\/i> ?[IV]+ \d+<\/p>\n/g,'')
     // .replace(//)
+    .replace(/<a [^>]+><sup>(\d+)<\/sup><\/a>/g,'⚓$1')
     .replace(/<p class="calibre1"><i class="calibre3"> ?Sutta \d+        <\/i> \d+<\/p>\n/g,'')
     .replace(/<\/?[^>]+>/g,'')
     return s;

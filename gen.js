@@ -1,5 +1,5 @@
 /* generate aligned offtext with sc template, */
-import {kluer, writeChanged,nodefs, readTextLines, readTextContent} from 'pitaka/cli'
+import {kluer, writeChanged,nodefs, readTextContent} from 'pitaka/cli'
 import { cs, sc } from 'pitaka/meta';
 // import { combineJSON, filesOf } from './bilara-folder.js';
 import {fillTemplate} from '../sc/src/filltemplate.js'

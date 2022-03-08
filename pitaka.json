@@ -1,6 +1,6 @@
 ﻿{
 	"name":"bb",
-	"title": "Bhikkhu Bodhi EN|sc",
+	"title": "Bhikkhu Bodhi EN|bb",
 	"description":"English Translation by Bhikkhu Bodhi and Maurice Walshe(DN)",
 	"template":"cs",
 	"lang":"en",
@@ -8,6 +8,6 @@
 	"labels":{
 	},
 	"homepage":"https://github.com/accelon/bb",
-	"rootdir":"off/",
+	"notejson":"f",
 	"files":"dn?.bb.off,mn?.bb.off,sn?.bb.off,an?.bb.off,an??.bb.off"
 }

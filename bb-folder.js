@@ -8,7 +8,7 @@ export const filesFolders={
     d23:["dn/_109?"],
     dn2:["dn/_{75-109}"],
     dn3:["dn/_{111-121}"],
-    dn_notes:["dn/_{126-127}"],dn1_notes:["dn/_{126-127}"],dn2_notes:["dn/_{126-127}"], dn3_notes:["dn/_{126-127}"],
+    dn_notes:["dn/_{126-127}"],dn1_notes:["dn/?_126"],dn2_notes:["dn/_{126-127}"], dn3_notes:["dn/?_127"],
     mn1:["mn/_{32-214}"], 
     mn2:["mn/_{215-282}"],
     mn3:["mn/_{283-393}"],
@@ -40,6 +40,10 @@ export const filesFolders={
     an6:["an/_{197-211}."],an7:["an/_{212-228}."],an8:["an/_{230-256}."],an9:["an/?_257."], an10:["an/_{258-268}."],an11:["an/_{269-271}."],
 
     an_notes:["an/_{273-283}"],
+    an1_notes:["an/?_273"],
+    an2_notes:["an/?_274"], an3_notes:["an/?_275"], an4_notes:["an/?_276"],
+    an5_notes:["an/?_277"], an6_notes:["an/?_278"], an7_notes:["an/?_279"], an8_notes:["an/?_280"],
+    an9_notes:["an/?_281"], an10_notes:["an/?_282"], an11_notes:["an/?_283"],
     snp:["snp/_{7-89}.html"]
 }
 for (let i=2;i<14;i++) filesFolders['d'+i]=["dn/?_"+(''+(i+60)).padStart(3,'0')];//_62 dn1

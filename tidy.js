@@ -3,16 +3,15 @@ import {kluer, writeChanged,nodefs, readTextLines, readTextContent} from 'pitaka
 import { sc,cs } from 'pitaka/meta';
 import {PTSParaLineCount} from '../sc/index.js'
 import { cleanHTML } from './cleanhtml.js';
-import {stripNotes,loadNotes,serializeNotes} from './notes.js'
+import {loadNotes,serializeNotes, fixNotesMarker} from './notes.js'
 import { combineHTML, filesOf} from './bb-folder.js';
 import {  alignParagraphLinecount, combineHeaders, toParagraphs } from 'pitaka/align';
 import {SuttaCentralify,countParaVakya} from './tosc.js';
 await nodefs;
 const datafolder='epub/';
 const desfolder='json/';
-const notefolder='off/';
 const {yellow} =kluer;
-console.log(yellow('syntax'),'node tidy [dmsa]');
+console.log(yellow('syntax'),'node tidy [dmsa]n\\d');
 const bkpf=process.argv[2]||"dn";
 let sutta=cs.suttaOfBook(bkpf);//.filter(it=>it.substr(0,bkpf.length)==bkpf);
 if (!sutta.length) sutta=[bkpf];
@@ -23,6 +22,7 @@ sutta.forEach(suttaid=>{
     const [combined]=combineHTML(files.map(f=>datafolder+f));
 
     const s=cleanHTML(combined,suttaid);
+    writeChanged('temp.txt',s)
     const combinedPN=suttaid[0]==='s'||suttaid[0]==='a';
     let out=[]
     const paras=toParagraphs(s.split('\n'));
@@ -41,7 +41,7 @@ sutta.forEach(suttaid=>{
     }
 
     const outfn=desfolder+suttaid+'.json'
-    out=stripNotes(out,notes);
+    out=fixNotesMarker(out,notes,bkpf);
     const outbuffer=combineHeaders(out.join('\n'));
 
     let segid=suttaid.replace(/^(.)/,'$1n')
@@ -52,6 +52,6 @@ sutta.forEach(suttaid=>{
 });
 //save note only for single book
 if (bkpf.match(/\d+$/)) {
-    const notefn=notefolder+bkpf+'.notes.json';
+    const notefn=desfolder+bkpf+'.notes.json';  //resolve in gen.js and save to off
     writeChanged(notefn, serializeNotes(notes));
 }

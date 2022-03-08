@@ -69,7 +69,8 @@ const replaceSN=(s,id)=>{
     return s;
 }
 const replaceAN=(s,id)=>{
-    s=s.replace(/<p class="calibre1"><i class="calibre3">(\d+) \(\d+\) ?[–\-] ?(\d+) \(\d+\)/g,(m,pn,pnend)=>{
+    s=s.replace(/<p class="calibre1"><a id="p\d+"><\/a>.+?<\/p>\n/g,'')
+    .replace(/<p class="calibre1"><i class="calibre3">(\d+) \(\d+\) ?[–\-] ?(\d+) \(\d+\)/g,(m,pn,pnend)=>{
         return '^n'+pn+'-'+pnend+' ';
     }).replace(/<p class="calibre1"><i class="calibre3">(\d+) \(\d+\)/g,(m,pn)=>{
         return '^n'+pn+' ';

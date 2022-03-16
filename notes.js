@@ -1,5 +1,4 @@
-import { pinPos } from "pitaka/align";
-import { linePN, parseOfftextLine } from "pitaka/offtext";
+
 import { stripLinesNote } from "pitaka/utils";
 import { combineHTML } from "./bb-folder.js"
 const html2offtag=s=>{
@@ -115,33 +114,3 @@ export const serializeNotes=notes=>{
     return '['+out.join(',\n')+']'
 }
 /* resolve in gen.js */
-export const pinNotes=(lines,notes)=>{
-    const out=[];
-    const NoteIdx={};
-    notes.forEach(note=>NoteIdx[note.id]=note);
-    for (let i=0;i<lines.length;i++) {
-        let line=lines[i],accwidth=0;
-        const nline=line.replace(/⚓(\d+) ?/g,(m,nid,off)=>{
-            const note=NoteIdx[nid];
-            if (note) {
-                note.y=i;    
-                note.pin=off-accwidth; //update the position to be pinned (foot note marker removed)
-                NoteIdx[nid]=note;
-            } else {
-                console.log('note not found',nid)
-            }
-            accwidth+=m.length;
-            return '';
-        })
-        if (nline!==line) lines[i]=nline;
-    }
-
-    for (let nid in notes) {
-        const note=notes[nid];
-
-        if (typeof note.y=='undefined') continue;
-        const pin=pinPos(lines[note.y], note.pin, {wholeword:true,backward:true,offtext:true});
-        out.push([note.y,pin, note.val, note.id])
-    }
-    return out;
-}

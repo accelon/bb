@@ -4,7 +4,7 @@ import { cs, sc } from 'pitaka/meta';
 // import { combineJSON, filesOf } from './bilara-folder.js';
 import {fillTemplate} from '../sc/src/filltemplate.js'
 import {combineJSON} from '../sc/src/bilara-folder.js'
-import {pinNotes} from './notes.js';
+import {pinNotes} from 'pitaka/align';
 const {yellow,red} =kluer;
 await nodefs
 const srcfolder='json/';

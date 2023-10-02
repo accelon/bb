@@ -1,23 +1,23 @@
 
-import {kluer, writeChanged,nodefs, readTextLines, readTextContent} from 'pitaka/cli'
-import { sc,cs } from 'pitaka/meta';
+import {alignParagraphLinecount, combineHeaders, toParagraphs ,
+     meta_sc,meta_cs, writeChanged,nodefs, readTextLines, readTextContent} from 'ptk/nodebundle.cjs'
+import {yellow} from 'ptk/cli/colors.cjs'
 import {PTSParaLineCount} from '../sc/index.js'
 import { cleanHTML } from './cleanhtml.js';
 import {loadNotes,serializeNotes, fixNotesMarker} from './notes.js'
 import { combineHTML, filesOf} from './bb-folder.js';
-import {  alignParagraphLinecount, combineHeaders, toParagraphs } from 'pitaka/align';
+
 import {SuttaCentralify,countParaVakya} from './tosc.js';
 await nodefs;
 const datafolder='epub/';
 const desfolder='json/';
-const {yellow} =kluer;
 console.log(yellow('syntax'),'node tidy [dmsa]n\\d');
 const bkpf=process.argv[2]||"dn";
-let sutta=cs.suttaOfBook(bkpf);//.filter(it=>it.substr(0,bkpf.length)==bkpf);
+let sutta=meta_cs.suttaOfBook(bkpf);//.filter(it=>it.substr(0,bkpf.length)==bkpf);
 if (!sutta.length) sutta=[bkpf];
 const notes=loadNotes( filesOf(bkpf+'_notes', datafolder,true), bkpf );
 sutta.forEach(suttaid=>{
-    let files=sc.sortFilenames(filesOf(suttaid,datafolder));
+    let files=meta_sc.sortFilenames(filesOf(suttaid,datafolder));
     const ptspar=PTSParaLineCount(suttaid);
     const [combined]=combineHTML(files.map(f=>datafolder+f));
 

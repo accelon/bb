@@ -1,4 +1,4 @@
-import { combineHeaders } from "pitaka/align";
+import { combineHeaders } from "ptk/nodebundle.cjs";
 
 const replacePN=m1=>{
     let s='\n^n'+m1.replace(/[\-—–]+/,'-').replace(/ +/g,'').replace(/\.$/,'').replace(/(\d)\.\-/,'$1-')+' '

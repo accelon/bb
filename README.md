@@ -1,7 +1,8 @@
 # Bhikkhu Bodhi translation in offtext format
 
 ## prerequisite
-search and download wisdom publication epub from www.pdfdrive.com , rename *.epub to *.zip,  extract to epub/dn , epub/mn , epub/sn , epub/an , epub/snp respectively
+download epub book from https://readingfaithfully.org/tag/bhikkhu-bodhi/ ,
+ rename *.epub to *.zip,  extract to epub/dn , epub/mn , epub/sn , epub/an , epub/snp respectively
 
 see bb-folder.js for filenames in epub
 

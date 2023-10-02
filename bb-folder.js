@@ -1,5 +1,5 @@
-import { readTextContent,patchBuf} from 'pitaka/cli'
-import { sc } from 'pitaka/meta';
+import { readTextContent,patchBuf,meta_sc} from 'ptk/nodebundle.cjs'
+
 import  Errata  from './errata.js';
 export const filesFolders={
     dn1:["dn/_{54-73}"], 
@@ -101,7 +101,7 @@ export const bookFiles=bkid=>{
 
 
 export const filesOf=(pat,rootfolder,withfolder=false)=>{
-    let files=sc.getFilesOfBook(pat,filesFolders,rootfolder);
+    let files=meta_sc.getFilesOfBook(pat,filesFolders,rootfolder);
     if (withfolder) files=files.map(fn=>rootfolder+fn);
     return files
 };

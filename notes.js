@@ -1,5 +1,5 @@
 
-import { stripLinesNote } from "pitaka/utils";
+import { stripLinesNote } from "ptk/nodebundle.cjs";
 import { combineHTML } from "./bb-folder.js"
 const html2offtag=s=>{
     s=s.replace(/\[/g,'〔').replace(/\]/g,'〕')

@@ -1,4 +1,4 @@
-import {linePN} from 'pitaka/offtext'
+import {linePN} from 'ptk/nodebundle.cjs'
 
 
 export const SuttaCentralify=(lines,prefix,ptspar)=>{

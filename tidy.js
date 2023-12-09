@@ -14,6 +14,7 @@ const desfolder='json/';
 console.log(yellow('syntax'),'node tidy [dmsa]n\\d');
 const bkpf=process.argv[2]||"dn";
 let sutta=meta_cs.suttaOfBook(bkpf);//.filter(it=>it.substr(0,bkpf.length)==bkpf);
+
 if (!sutta.length) sutta=[bkpf];
 const notes=loadNotes( filesOf(bkpf+'_notes', datafolder,true), bkpf );
 sutta.forEach(suttaid=>{
@@ -46,9 +47,7 @@ sutta.forEach(suttaid=>{
 
     let segid=suttaid.replace(/^(.)/,'$1n')
     if (!combinedPN) segid+=':' //sn and an has pn before :
-    if (writeChanged(outfn,SuttaCentralify(outbuffer, segid ,combinedPN&&ptspar ))) {
-        console.log('written',outfn)
-    }
+    writeChanged(outfn,SuttaCentralify(outbuffer, segid ,combinedPN&&ptspar ),true)
 });
 //save note only for single book
 if (bkpf.match(/\d+$/)) {

@@ -1,6 +1,6 @@
 /* generate aligned offtext with sc template, */
 import {writeChanged,nodefs, readTextContent, meta_cs,meta_sc,pinNotes} from 'ptk/nodebundle.cjs'
-import {yellow} from 'ptk/cli/colors.cjs'
+import {red,yellow} from 'ptk/cli/colors.cjs'
 // import { combineJSON, filesOf } from './bilara-folder.js';
 import {fillTemplate} from '../sc/src/filltemplate.js'
 import {combineJSON} from '../sc/src/bilara-folder.js'
@@ -28,12 +28,19 @@ books.forEach(book=>{
     const linecount=lines.length;
     const keepmarker=true; //true to use ^f , otherwise use pin
     const notes=pinNotes(lines,notejson,{keepmarker}); //lines will be updated
-    if (writeChanged(desfolder+book+'.bb'+'.ori.off',lines.join('\n'))) {
-        console.log('written',book,'line count',linecount)
+    let outfn=desfolder+book+'.bb.off';
+    if (fs.existsSync(outfn)) {
+        console.log(outfn,red('exists, renamed to'))
+        outfn=desfolder+book+'.bb'+'.ori.off';
+    }
+
+    if (writeChanged(outfn,lines.join('\n'))) {
+        console.log('written',book,'line count',linecount,outfn)
     } else {
-        console.log('same',book,'line count',linecount)
+        console.log('same',book,'line count',linecount,outfn)
     }
     if (keepmarker) {
+        notes.unshift('^:<name='+book+' footnote=bk preload=true>	note');
         writeChanged(desfolder+book+'.notes.tsv',notes.join('\n'),true)
     } else {
         const noteout='['+notes.map( ([y,pin,val,id]) =>JSON.stringify({y,id,pin,val})).join(",\n")+']';

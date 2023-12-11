@@ -4,9 +4,9 @@ import  Errata  from './errata.js';
 export const filesFolders={
     dn1:["dn/_{54-73}"], 
     d1:["dn/_{54-61}"],
-    d22:["dn/_{82-108}"],
-    d23:["dn/_109?"],
     dn2:["dn/_{75-109}"],
+    d22:"dn/_{83-108}",
+    d23:"dn/_109?",
     dn3:["dn/_{111-121}"],
     dn_notes:["dn/_{126-127}"],dn1_notes:["dn/?_126"],dn2_notes:["dn/_{126-127}"], dn3_notes:["dn/?_127"],
     mn1:["mn/_{32-214}"], 
@@ -46,15 +46,15 @@ export const filesFolders={
     an9_notes:["an/?_281"], an10_notes:["an/?_282"], an11_notes:["an/?_283"],
     snp:["snp/_{7-89}.html"]
 }
-for (let i=2;i<14;i++) filesFolders['d'+i]=["dn/?_"+(''+(i+60)).padStart(3,'0')];//_62 dn1
-for (let i=14;i<23;i++) filesFolders['d'+i]=["dn/?_"+(''+(i+61)).padStart(3,'0')];//_75 dn2
-for (let i=24;i<35;i++) filesFolders['d'+i]=["dn/?_"+(''+(i+87)).padStart(3,'0')]; //_111 dn3
+for (let i=2;i<14;i++) if (!filesFolders['d'+i]) filesFolders['d'+i]=["dn/?_"+(''+(i+60)).padStart(3,'0')];//_62 dn1
+for (let i=14;i<23;i++) if (!filesFolders['d'+i]) filesFolders['d'+i]=["dn/?_"+(''+(i+61)).padStart(3,'0')];//_75 dn2
+for (let i=24;i<35;i++) if (!filesFolders['d'+i]) filesFolders['d'+i]=["dn/?_"+(''+(i+87)).padStart(3,'0')]; //_111 dn3
 
-for (let i=1;i<22;i++) filesFolders['s'+i]=["sn/?c"+(''+(i)).padStart(2,'0')+'_r'];// sn1
-for (let i=22;i<35;i++) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn3
-for (let i=35;i<45;i++) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn4
-for (let i=45;i<57;i++) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn5
-for (let i=1;i<=11;i++) filesFolders['a'+i]=filesFolders['an'+i];
+for (let i=1;i<22;i++) if (!filesFolders['s'+i]) filesFolders['s'+i]=["sn/?c"+(''+(i)).padStart(2,'0')+'_r'];// sn1
+for (let i=22;i<35;i++) if (!filesFolders['s'+i]) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn3
+for (let i=35;i<45;i++) if (!filesFolders['s'+i]) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn4
+for (let i=45;i<57;i++) if (!filesFolders['s'+i]) filesFolders['s'+i]=["sn/?c"+(''+(i+1)).padStart(2,'0')+'_r'];// sn5
+for (let i=1;i<=11;i++) if (!filesFolders['s'+i]) filesFolders['a'+i]=filesFolders['an'+i];
 
 const hasNote={
     'epub/sn/tran_9780861719730_oeb_c11_r1.html':true,   //text and footnotes

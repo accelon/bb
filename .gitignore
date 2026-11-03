@@ -1,3 +1,4 @@
+# 來源（remote 沒有；從 D:\2023\bb 搬入或重新下載）
 *.zip
 *.7z
 *.html
@@ -8,3 +9,12 @@ epub
 bb
 json
 *.ptk
+
+# 轉檔產物與中間檔（可由 off/ 重建；見 README §3）
+out/
+data/*
+
+# 本機暫存
+*.log
+*.tmp
+

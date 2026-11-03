@@ -1,13 +1,18 @@
 {
   "name": "bb",
-  "version": "1.0.0",
-  "description": "",
-  "main": "tidy.js",
-  "type":"module",
+  "version": "1.2.0",
+  "description": "Bhikkhu Bodhi / Maurice Walshe English translation of the Pali canon, in Accelon XML (paragraph-aligned to cs)",
+  "main": "src/bb-src.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "src": "bun run src/bb-src.ts",
+    "convert": "bun run src/off2accelon.ts",
+    "snp": "bun run src/snp2accelon.ts",
+    "check": "bun run src/off2accelon.ts --check",
+    "align": "bun run src/align-check.ts"
   },
   "keywords": [],
   "author": "",
   "license": "CC0"
 }
+
